@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -21,7 +22,10 @@ public class LoginTestFF {
     @Before
     public void  start() {
         FirefoxOptions options = new FirefoxOptions();
+
         options.setBinary(new FirefoxBinary(new File("C:\\Program Files\\Nightly\\firefox.exe")));
+        options.setProfile(new FirefoxProfile());
+
         driver = new FirefoxDriver(options);
         wait = new WebDriverWait(driver, 10);
     }
