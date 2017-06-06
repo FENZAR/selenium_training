@@ -21,12 +21,12 @@ public class LoginTestFF {
 
     @Before
     public void  start() {
-        FirefoxOptions options = new FirefoxOptions();
+        //FirefoxOptions options = new FirefoxOptions();
 
-        options.setBinary(new FirefoxBinary(new File("C:\\Program Files\\Nightly\\firefox.exe")));
-        options.setProfile(new FirefoxProfile());
+       // options.setBinary(new FirefoxBinary(new File("C:\\Program Files\\Nightly\\firefox.exe")));
+       // options.setProfile(new FirefoxProfile());
 
-        driver = new FirefoxDriver(options);
+        driver = new FirefoxDriver();
         wait = new WebDriverWait(driver, 10);
     }
 
