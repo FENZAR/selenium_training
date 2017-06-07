@@ -27,7 +27,7 @@ public class Task7 {
     @Before
     public void  start() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class Task7 {
         driver.findElement(By.name("login")).click();
 
         List<WebElement> mainMenu = driver.findElements(By.id("box-apps-menu li"));
-        WebElement m, e, u, s;
+        WebElement m;
         for (int i = 1; i <= mainMenu.size(); i++){
             m = driver.findElement(By.cssSelector("ul#box-apps-menu > li:nth-of-type(" + i + ")"));
             m.click();
@@ -46,9 +46,7 @@ public class Task7 {
             Assert.assertTrue(isElementPresent(driver,By.tagName("h1")));
 
             try {
-                e = driver.findElement(By.cssSelector("ul#box-apps-menu > li.selected[id = 'app-']"));
-                u = e.findElement(By.cssSelector("ul.docs"));    // Зависает тут, если нет списка 2го уровня
-                List<WebElement> subMenu = u.findElements(By.tagName("li"));
+                List<WebElement> subMenu = driver.findElements(By.xpath("//ul[@class = 'docs']/li"));
 
                 WebElement t;
                 for (int j = 1; j <= subMenu.size(); j++) {
