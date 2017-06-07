@@ -1,6 +1,7 @@
 package ru.stqa.training.selenium;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -37,20 +38,28 @@ public class Task7 {
         driver.findElement(By.name("login")).click();
 
         List<WebElement> mainMenu = driver.findElements(By.id("box-apps-menu li"));
-        WebElement m;
+        WebElement m, e, u, s;
         for (int i = 1; i <= mainMenu.size(); i++){
             m = driver.findElement(By.cssSelector("ul#box-apps-menu > li:nth-of-type(" + i + ")"));
             m.click();
 
-            if (isElementPresent(driver,By.tagName("h1")));
+            Assert.assertTrue(isElementPresent(driver,By.tagName("h1")));
 
-            List<WebElement> subMenu = driver.findElements(By.xpath("//ul[@class = 'docs']/li"));
-            WebElement t;
-            for (int j = 1; j <= subMenu.size(); j++){
-                t = driver.findElement(By.cssSelector("ul.docs > li:nth-of-type(" + j + ")"));
-                t.click();
+            try {
+                e = driver.findElement(By.cssSelector("ul#box-apps-menu > li.selected[id = 'app-']"));
+                u = e.findElement(By.cssSelector("ul.docs"));    // Зависает тут, если нет списка 2го уровня
+                List<WebElement> subMenu = u.findElements(By.tagName("li"));
 
-                if (isElementPresent(driver,By.tagName("h1")));
+                WebElement t;
+                for (int j = 1; j <= subMenu.size(); j++) {
+                    t = driver.findElement(By.cssSelector("ul.docs > li:nth-of-type(" + j + ")"));
+                    t.click();
+
+                    Assert.assertTrue(isElementPresent(driver, By.tagName("h1")));
+                }
+
+            } catch (NoSuchElementException ex){
+                continue;
             }
         }
     }
