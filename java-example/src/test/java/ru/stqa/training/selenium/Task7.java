@@ -10,19 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class Task7 {
     private WebDriver driver;
-
-    private boolean isElementPresent(WebDriver driver, By locator){
-        try{
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException ex){
-            return false;
-        }
-    }
 
     @Before
     public void  start() {
@@ -42,20 +32,16 @@ public class Task7 {
         for (int i = 1; i <= mainMenu.size(); i++){
             m = driver.findElement(By.cssSelector("ul#box-apps-menu > li:nth-of-type(" + i + ")"));
             m.click();
-
-            Assert.assertTrue(isElementPresent(driver,By.tagName("h1")));
+            Assert.assertNotNull(driver.findElement(By.tagName("h1")));
 
             try {
                 List<WebElement> subMenu = driver.findElements(By.xpath("//ul[@class = 'docs']/li"));
-
                 WebElement t;
                 for (int j = 1; j <= subMenu.size(); j++) {
                     t = driver.findElement(By.cssSelector("ul.docs > li:nth-of-type(" + j + ")"));
                     t.click();
-
-                    Assert.assertTrue(isElementPresent(driver, By.tagName("h1")));
+                    Assert.assertNotNull(driver.findElement(By.tagName("h1")));
                 }
-
             } catch (NoSuchElementException ex){
                 continue;
             }
