@@ -23,10 +23,11 @@ public class Task8 {
     @Test
     public void Task8() {
         driver.get("http://localhost/litecart/en/");
-
-        List<WebElement> ducks = driver.findElements(By.cssSelector("div.middle > div.content > div.box ul > li"));
+        List<WebElement> sticks;
+        List<WebElement> ducks = driver.findElements(By.cssSelector("di.middle > div.content > div.box ul > li"));
         for (WebElement e : ducks){
-            Assert.assertNotNull(e.findElement(By.cssSelector("div[class^='sticker']")));
+            sticks = e.findElements(By.cssSelector("div[class^='sticker']"));
+            Assert.assertTrue(sticks.size() == 1);
         }
     }
 
