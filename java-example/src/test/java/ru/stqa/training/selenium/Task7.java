@@ -14,6 +14,15 @@ import java.util.List;
 public class Task7 {
     private WebDriver driver;
 
+    private boolean isElementPresent(WebDriver driver, By locator){
+        try{
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex){
+            return false;
+        }
+    }
+
     @Before
     public void  start() {
         driver = new ChromeDriver();
@@ -32,18 +41,17 @@ public class Task7 {
         for (int i = 1; i <= mainMenu.size(); i++){
             m = driver.findElement(By.cssSelector("ul#box-apps-menu > li:nth-of-type(" + i + ")"));
             m.click();
-            Assert.assertNotNull(driver.findElement(By.tagName("h1")));
+            Assert.assertTrue(isElementPresent(driver, By.tagName("h1")));
 
-            try {
+            // subMenu
+            if (isElementPresent(driver, By.xpath("//ul[@class = 'docs']"))) {
                 List<WebElement> subMenu = driver.findElements(By.xpath("//ul[@class = 'docs']/li"));
                 WebElement t;
                 for (int j = 1; j <= subMenu.size(); j++) {
                     t = driver.findElement(By.cssSelector("ul.docs > li:nth-of-type(" + j + ")"));
                     t.click();
-                    Assert.assertNotNull(driver.findElement(By.tagName("h1")));
+                    Assert.assertTrue(isElementPresent(driver, By.tagName("h1")));
                 }
-            } catch (NoSuchElementException ex){
-                continue;
             }
         }
     }
