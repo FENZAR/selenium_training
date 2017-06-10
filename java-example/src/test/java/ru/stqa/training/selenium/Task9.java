@@ -1,16 +1,14 @@
 package ru.stqa.training.selenium;
 
 import com.google.common.collect.Ordering;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
+import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class Task9 {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 3/*seconds*/);
 
-        driver.get("http://localhost/litecart/admin/?app=countries&doc=countries");
+        driver.get("http://localhost/litecart/admin");
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.name("login")).click();
@@ -45,6 +43,8 @@ public class Task9 {
         By countries, regions;
         WebElement link, nZones;
         int num, size;
+
+        driver.get("http://localhost/litecart/admin/?app=countries&doc=countries");
 
         // a
         countries = By.cssSelector("table.dataTable tr.row > td:nth-of-type(5) > a");
@@ -71,6 +71,27 @@ public class Task9 {
 
                 driver.navigate().back();
             }
+        }
+    }
+
+    @Test
+    public void  Task9_2() {
+        By regions;
+        WebElement link;
+        int size;
+
+        driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
+
+        size = driver.findElements(By.cssSelector("table.dataTable tr.row")).size();
+        for (int i = 2; i < size + 2; i++) {
+            link = driver.findElement(By.cssSelector("table.dataTable tr.row:nth-of-type(" + i + ") > td:nth-of-type(3) > a"));
+            link.click();
+            wait.until(presenceOfElementLocated(By.cssSelector("tbody h1")));
+
+            regions = By.cssSelector("table#table-zones select[name $= '[zone_code]'] > option[selected='selected'] > a");
+            Assert.assertTrue(checkOrdering(driver, regions));
+
+            driver.navigate().back();
         }
     }
 
