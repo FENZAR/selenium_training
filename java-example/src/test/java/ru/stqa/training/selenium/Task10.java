@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.Color;
 
@@ -50,21 +51,19 @@ public class Task10 {
     @Test
     public void TaskChrome() {
         driver = new ChromeDriver();
-        driver.get("http://localhost/litecart/en/");
         Task10();
     }
 
     @Test
     public void TaskFirefox() {
-        driver = new FirefoxDriver();
-        driver.get("http://localhost/litecart/en/");
-        Task10();
+        FirefoxOptions options = new FirefoxOptions().setLegacy(false);
+        driver = new FirefoxDriver(options);
+       Task10();
     }
 
     @Test
     public void TaskIE() {
         driver = new InternetExplorerDriver();
-        driver.get("http://localhost/litecart/en/");
         Task10();
     }
 
@@ -74,6 +73,8 @@ public class Task10 {
 
         Dimension regSize, actSize;
         WebElement link, regular, action;
+
+        driver.get("http://localhost/litecart/en/");
 
         //MainPage
         name = driver.findElement(By.cssSelector("div#box-campaigns div.name")).getAttribute("textContent");
