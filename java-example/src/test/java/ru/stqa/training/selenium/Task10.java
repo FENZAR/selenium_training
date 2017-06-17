@@ -69,7 +69,7 @@ public class Task10 {
         String name, name2, regPrice, regPrice2, actPrice, actPrice2;
 
         Dimension regSize, actSize;
-        WebElement link, regular, action, e;
+        WebElement link, regular, action;
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://localhost/litecart/en/");
@@ -101,9 +101,7 @@ public class Task10 {
 
         //SecondPage
         // а)
-        e = driver.findElement(By.cssSelector("div.box  h1.title"));
-        name2 = e.getAttribute("textContent");
-        //name2 = driver.findElement(By.xpath("//div[@id = 'box-product']//h1[@class = 'title']")).getAttribute("textContent");
+        name2 = driver.findElement(By.cssSelector("div.box  h1.title")).getAttribute("textContent");
         Assert.assertTrue(name.equals(name2));
 
         // б)
