@@ -2,7 +2,6 @@ package ru.stqa.training.selenium;
 
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -12,9 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.Color;
-
-import static java.lang.System.in;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Task10 {
     private WebDriver driver;
@@ -58,12 +55,14 @@ public class Task10 {
     public void TaskFirefox() {
         FirefoxOptions options = new FirefoxOptions().setLegacy(false);
         driver = new FirefoxDriver(options);
-       Task10();
+        Task10();
     }
 
     @Test
     public void TaskIE() {
-        driver = new InternetExplorerDriver();
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
+        driver = new InternetExplorerDriver(caps);
         Task10();
     }
 
