@@ -2,6 +2,7 @@ package ru.stqa.training.selenium;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -12,6 +13,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.concurrent.TimeUnit;
 
 public class Task10 {
     private WebDriver driver;
@@ -32,12 +35,6 @@ public class Task10 {
         if (IsGray) return r == g & g == b;
         else return g == 0 & b == 0;
     }
-
-    /*@Before
-    public void start() {
-        driver = new ChromeDriver();
-        driver.get("http://localhost/litecart/en/");
-    }*/
 
     @After
     public void stop() {
@@ -62,6 +59,7 @@ public class Task10 {
     public void TaskIE() {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
+        caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
         driver = new InternetExplorerDriver(caps);
         Task10();
     }
@@ -71,8 +69,9 @@ public class Task10 {
         String name, name2, regPrice, regPrice2, actPrice, actPrice2;
 
         Dimension regSize, actSize;
-        WebElement link, regular, action;
+        WebElement link, regular, action, e;
 
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://localhost/litecart/en/");
 
         //MainPage
@@ -102,7 +101,9 @@ public class Task10 {
 
         //SecondPage
         // а)
-        name2 = driver.findElement(By.cssSelector("div#box-product  h1")).getAttribute("textContent");
+        e = driver.findElement(By.cssSelector("div.box  h1.title"));
+        name2 = e.getAttribute("textContent");
+        //name2 = driver.findElement(By.xpath("//div[@id = 'box-product']//h1[@class = 'title']")).getAttribute("textContent");
         Assert.assertTrue(name.equals(name2));
 
         // б)
