@@ -64,6 +64,7 @@ public class Task11 {
         curCtrl = driver.findElement(By.cssSelector("form[name = 'customer_form'] input[name = 'phone']"));
         curCtrl.sendKeys("+1" + cur.toString());
 
+        // Country
         curCtrl = driver.findElement(By.cssSelector("form[name = 'customer_form'] span.select2-selection__rendered"));
         curCtrl.click();
         curCtrl = driver.findElement(By.cssSelector("span[class = 'select2-search select2-search--dropdown']"));
@@ -72,6 +73,12 @@ public class Task11 {
         actions.sendKeys("United States" + Keys.ENTER);
         actions.build().perform();
 
+        // State
+        curCtrl = driver.findElement(By.cssSelector("form[name = 'customer_form'] select[name = 'zone_code']"));
+        actions.sendKeys(curCtrl, "Utah" + Keys.ENTER);
+        actions.build().perform();
+
+        // Create account
         curCtrl = driver.findElement(By.cssSelector("button[name = 'create_account']"));
         curCtrl.click();
 
