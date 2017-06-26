@@ -1,7 +1,6 @@
 package ru.stqa.training.selenium;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -11,9 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import org.openqa.selenium.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 public class Task13 {
     public WebDriver driver;
@@ -30,7 +27,6 @@ public class Task13 {
         driver.quit();
         driver = null;
     }
-
 
     private boolean isElementPresent(WebDriver driver, By locator) {
         try {
