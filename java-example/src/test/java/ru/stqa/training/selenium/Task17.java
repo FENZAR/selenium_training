@@ -1,6 +1,5 @@
 package ru.stqa.training.selenium;
 
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.logging.LogEntry;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -45,6 +43,6 @@ public class Task17 {
             element.click();
             driver.get("http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1");
         }
-        Assert.assertTrue(driver.manage().logs().get("browser").getAll().size() == 0);
+        Assert.assertTrue(driver.manage().logs().get("browser").getAll().isEmpty());
     }
 }
