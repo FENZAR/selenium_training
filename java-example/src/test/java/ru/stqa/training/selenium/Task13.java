@@ -18,7 +18,6 @@ public class Task13 {
     @Before
     public  void start() {
         driver = new ChromeDriver();
-        //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get("http://localhost/litecart/en/");
     }
 
