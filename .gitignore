@@ -16,3 +16,4 @@ gradle-app.setting
 *.class
 *.class
 java-example/build/classes/test/ru/stqa/training/selenium/Task13.class
+java-example/src/test/java/ru/stqa/training/selenium/Task17_2.java

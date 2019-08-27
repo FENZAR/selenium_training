@@ -3,20 +3,26 @@ package ru.stqa.training.selenium;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class Task10 {
     private WebDriver driver;
+    private WebDriver driver2;
+
+    public static final String USERNAME = "semyongoryaev1";
+    public static final String AUTOMATE_KEY = "BieEsfgFh2qtWNGW5eaC";
+    public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
+
 
     private boolean checkColor(WebElement e, boolean IsGray) {
         String color;
@@ -55,7 +61,7 @@ public class Task10 {
     }
 
     @Test
-    public void TaskIE() {
+    public void TaskIE() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
         caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
